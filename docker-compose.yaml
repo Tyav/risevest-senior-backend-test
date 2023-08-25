@@ -1,0 +1,18 @@
+version: "3"
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_USER: mosesaondofatyav
+      POSTGRES_PASSWORD: 'password'
+      POSTGRES_DB: risevest-test
+  app:
+    image: risevest-app
+    ports:
+      - 13000:4040
+    environment:
+      - DB_SERVER=db
+      - DB_PORT=5432
+      - DB_USER=mosesaondofatyav
+      - DB_PASS=password
+      - DB_NAME=risevest-test
