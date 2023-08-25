@@ -16,8 +16,6 @@ app.set('env', process.env.NODE_ENV);
 
 app.use(methodOverride());
 
-const router = express.Router();
-
-router.use(routes);
+app.use(routes);
 
 export default app;
