@@ -1,4 +1,4 @@
-import jwt from 'jsonwebtoken';
+import jwt from "jsonwebtoken";
 
 export class AuthService {
   /**
@@ -13,6 +13,6 @@ export class AuthService {
   verifyAuthToken(token: string): jwt.JwtPayload {
     return jwt.verify(token, process.env.JWT_SECRET!) as jwt.JwtPayload;
   }
-};
+}
 
 export default new AuthService();

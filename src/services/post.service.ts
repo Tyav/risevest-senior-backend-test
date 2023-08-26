@@ -9,10 +9,28 @@ export class PostService {
    * Creates a user
    */
   async createPost(data: CreatePostType): Promise<Post> {
-    const post = await this.postRepository.create({ user: { id: data.userId }, title: data.title, content: data.content }).save();
+    const post = await this.postRepository
+      .create({
+        user: { id: data.userId },
+        title: data.title,
+        content: data.content,
+      })
+      .save();
     return post;
   }
-  
+  /**
+   * retrieve a user's posts
+   */
+  async getUserPosts(userId: number): Promise<Post[]> {
+    const posts = await this.postRepository.find({
+      where: {
+        user: {
+          id: userId,
+        },
+      },
+    });
+    return posts;
+  }
 }
 
 export default new PostService(handleGetRepository(Post));

@@ -8,6 +8,10 @@ export const postController = {
   createPost: catchAsync(async (req: Request, res: Response) => {
     const body = req.body;
     const post = await postService.createPost({...body, userId: req.user.id});
-    return res.status(201).json(post);
-  })
-}
+    return res.status(200).json(post);
+  }),
+  getUserPosts: catchAsync(async (req: Request, res: Response) => {
+    const posts = await postService.getUserPosts(req.user.id);
+    return res.status(200).json({posts});
+  }),
+};

@@ -19,5 +19,6 @@ router.get('/:userId/auth-token', authController.getUserAuthToken);
 router
   .route('/:userId/posts')
   .post(Validator.validate(createPostValidator), postController.createPost)
+  .get(postController.getUserPosts)
 
 export default router;

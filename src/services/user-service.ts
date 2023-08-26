@@ -1,7 +1,10 @@
 import { Repository } from "typeorm";
 import { User } from "../entities/user.entity";
 import { CreateUserType } from "../interfaces/User";
-import { ConflictError, ResourceNotFoundError } from "../utils/errors/error-handlers";
+import {
+  ConflictError,
+  ResourceNotFoundError,
+} from "../utils/errors/error-handlers";
 import handleGetRepository from "../utils/connection";
 
 export class UserService {
@@ -36,31 +39,33 @@ export class UserService {
   async getAllUsers(): Promise<User[]> {
     // TODO: consider pagination
     const users = await this.userRepository.find();
-    return users
+    return users;
   }
 
   /**
-   * Retrieves user of an id. 
-   * @param userId 
-   * @returns 
+   * Retrieves user of an id.
+   * @param userId
+   * @returns
    */
-  async getUserById(userId: string): Promise<User|null> {
+  async getUserById(userId: string): Promise<User | null> {
     const user = await this.userRepository.findOne({
       where: {
-        id: Number(userId)
-      }
+        id: Number(userId),
+      },
     });
     return user;
   }
   /**
    * Retrieves user of an id. errors if user is not found
-   * @param userId 
-   * @returns 
+   * @param userId
+   * @returns
    */
   async getUserByIdOrError(userId: string): Promise<User> {
     const user = await this.getUserById(userId);
     if (!user) {
-      throw new ResourceNotFoundError({ message: `User with id: ${userId} does not exist`})
+      throw new ResourceNotFoundError({
+        message: `User with id: ${userId} does not exist`,
+      });
     }
     return user;
   }
