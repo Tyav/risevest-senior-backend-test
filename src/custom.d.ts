@@ -1,7 +1,6 @@
-import { UserDto } from "./interfaces/User";
-
+import { User } from "./entities/user.entity";
 declare module 'express-serve-static-core' {
   export interface Request {
-    user: UserDto
+    user: User
   }
 }
