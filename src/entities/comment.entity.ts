@@ -1,10 +1,10 @@
 import "reflect-metadata";
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn, BaseEntity } from 'typeorm';
 import { Post } from './post.entity';
 import { User } from './user.entity';
 
 @Entity('Comments')
-export class Comment {
+export class Comment extends BaseEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 

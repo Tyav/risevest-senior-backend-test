@@ -1,11 +1,11 @@
 import { NextFunction, Request, Response } from "express";
-import { CreateUserType, UserDto } from "../interfaces/User";
+import { CreateUserType } from "../interfaces/User";
 import catchAsync from "../utils/errors/catch-async";
 import userService from "../services/user-service";
 
 export const userController = {
   createUser: catchAsync(async (req: Request, res: Response) => {
-    const body = req.body;
+    const body = <CreateUserType>req.body;
     const user = await userService.createUser(body);
     return res.status(201).json(user);
   }),

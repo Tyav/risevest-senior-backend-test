@@ -55,8 +55,20 @@ export class ConflictError implements IError {
   data: IErrorData;
 
   constructor(error: Partial<IError>) {
-    this.code = ErrorCode.RESOURCE_NOT_FOUND;
+    this.code = ErrorCode.CONFLICT;
     this.message = error.message || 'Request conflict';
+    this.data = error.data || {};
+  }
+}
+
+export class UnauthorizedAccess implements IError {
+  code: string;
+  message: string;
+  data: IErrorData;
+
+  constructor(error: Partial<IError>) {
+    this.code = ErrorCode.UNAUTHORIZED_ACCESS;
+    this.message = error.message || 'Unauthorized access';
     this.data = error.data || {};
   }
 }
@@ -77,6 +89,8 @@ export const HandleErrorResponse = (
     return res.status(404).json(new ResourceNotFoundError(err));
   case ErrorCode.CONFLICT:
     return res.status(409).json(new ConflictError(err));
+  case ErrorCode.UNAUTHORIZED_ACCESS:
+    return res.status(409).json(new UnauthorizedAccess(err));
   default:
     return res.status(500).json(new ServerError(err));
   }

@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import authService from "../services/auth-service";
 import userService from "../services/user-service";
-import { HandleErrorResponse } from "../utils/errors/error-handlers";
+import { HandleErrorResponse, UnauthorizedAccess } from "../utils/errors/error-handlers";
 
 export const authenticator = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -11,6 +11,6 @@ export const authenticator = async (req: Request, res: Response, next: NextFunct
     req.user = user
     next();
   } catch (error) {
-    HandleErrorResponse(error, res)
+    HandleErrorResponse(new UnauthorizedAccess({ message: 'Invalid or missing token'}), res)
   }
 }

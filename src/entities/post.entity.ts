@@ -1,10 +1,10 @@
 import "reflect-metadata";
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn, OneToMany } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn, OneToMany, BaseEntity } from 'typeorm';
 import { User } from './user.entity';
 import { Comment } from './comment.entity';
 
 @Entity('Posts')
-export class Post {
+export class Post extends BaseEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
@@ -26,5 +26,4 @@ export class Post {
     name: "created_at",
   })
   createdAt!: Date;
-
 }
