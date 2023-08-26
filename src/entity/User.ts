@@ -1,10 +1,10 @@
 import 'reflect-metadata';
-import { BaseEntity, Column, CreateDateColumn, Entity, Index, PrimaryColumn, UpdateDateColumn, VersionColumn } from 'typeorm';
+import { BaseEntity, Column, CreateDateColumn, Entity, Index, PrimaryColumn, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 
 
 @Entity('users')
 export class User extends BaseEntity {
-  @PrimaryColumn({ type: 'uuid', unique: true, primaryKeyConstraintName: 'IDX_users_id' })
+  @PrimaryGeneratedColumn({ type: 'int', primaryKeyConstraintName: 'IDX_users_id' })
     id!: string;
 
   @Column('varchar')
@@ -24,8 +24,4 @@ export class User extends BaseEntity {
   })
     updatedAt!: Date;
 
-  @VersionColumn({
-    type: 'int',
-  })
-    version!: number;
 }

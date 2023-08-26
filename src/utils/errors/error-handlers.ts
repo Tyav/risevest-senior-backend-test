@@ -49,6 +49,18 @@ export class ResourceNotFoundError implements IError {
   }
 }
 
+export class ConflictError implements IError {
+  code: string;
+  message: string;
+  data: IErrorData;
+
+  constructor(error: Partial<IError>) {
+    this.code = ErrorCode.RESOURCE_NOT_FOUND;
+    this.message = error.message || 'Request conflict';
+    this.data = error.data || {};
+  }
+}
+
 
 
 export const HandleErrorResponse = (
@@ -63,8 +75,30 @@ export const HandleErrorResponse = (
     return res.status(400).json(new BadRequest(err));
   case ErrorCode.RESOURCE_NOT_FOUND:
     return res.status(404).json(new ResourceNotFoundError(err));
-  default: {
+  case ErrorCode.CONFLICT:
+    return res.status(409).json(new ConflictError(err));
+  default:
     return res.status(500).json(new ServerError(err));
   }
-  }
 };
+
+  /*
+   * Error handler. Send stacktrace only during development
+   * @public
+   */
+  // static handler(err: IError, _: Request, res: Response) {
+  //   const response: IResponse = {
+  //     statusCode: err.status,
+  //     message: err.message,
+  //     errors: err.errors,
+  //     payload: undefined,
+  //     stack: err.stack,
+  //   };
+  //   if (process.env['NODE_ENV'] !== 'development') {
+  //     delete response.stack;
+  //   }
+
+  //   // to add the status in response header, remove comment from the code below
+  //   res.status(err.status);
+  //   return res.json(response);
+  // }
