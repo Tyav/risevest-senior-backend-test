@@ -2,7 +2,7 @@ import "reflect-metadata";
 import dotenv from 'dotenv';
 dotenv.config();
 import { DataSource } from "typeorm";
-import { User } from "./entity/User";
+import { User } from "./entities/User";
 import { CreateUsersTables1693009997173 } from "./migrations/1693009997173-CreateUsersTables";
 
 const isDev = process.env.NODE_ENV === "development";

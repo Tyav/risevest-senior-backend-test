@@ -5,7 +5,7 @@ import { BaseEntity, Column, CreateDateColumn, Entity, Index, PrimaryColumn, Pri
 @Entity('users')
 export class User extends BaseEntity {
   @PrimaryGeneratedColumn({ type: 'int', primaryKeyConstraintName: 'IDX_users_id' })
-    id!: string;
+    id!: number;
 
   @Column('varchar')
     name!: string;

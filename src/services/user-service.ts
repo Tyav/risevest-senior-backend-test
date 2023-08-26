@@ -1,19 +1,30 @@
+import { Repository } from "typeorm";
+import { User } from "../entities/User";
 import { CreateUserType, UserDto } from "../interfaces/User";
 import dataSource from "../typeorm-config";
 import { ConflictError } from "../utils/errors/error-handlers";
+import handleGetRepository from "../utils/connection";
 
-export const userService = {
-  create: async (data: CreateUserType): Promise<UserDto> => {
-    // check if user exist
-    const userExist = (await dataSource.query('SELECT EXISTS ( SELECT 1 from Users WHERE email = $1 )', [data.email]))[0];
-    if (userExist?.exists) {
-      throw new ConflictError({ message: 'User already exist.'})
+export class UserService {
+  constructor(private userRepository: Repository<User>) {}
+  async create(data: CreateUserType): Promise<User> {
+    if (await this.doesUserExistByEmail(data.email)) {
+      throw new ConflictError({ message: "User already exist." });
     }
-    // create user
-    await dataSource.query('INSERT INTO users (name, email) VALUES ($1, $2)', [ data.name, data.email ]);
+    const user = await this.userRepository
+      .create({ email: data.email, name: data.name })
+      .save();
 
-    const user = await <Promise<UserDto[]>>dataSource.query('SELECT id, name, email FROM Users WHERE email = $1', [ data.email]);
-
-    return user[0];
+    return user;
+  }
+  async doesUserExistByEmail(email: string): Promise<boolean> {
+    const user = await this.userRepository.findOne({
+      where: {
+        email,
+      },
+    });
+    return !!user;
   }
 }
+
+export default new UserService(handleGetRepository(User));
