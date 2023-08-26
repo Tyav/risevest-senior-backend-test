@@ -1,5 +1,5 @@
 import { Repository } from "typeorm";
-import { User } from "../entities/User";
+import { User } from "../entities/user.entity";
 import { CreateUserType, UserDto } from "../interfaces/User";
 import dataSource from "../typeorm-config";
 import { ConflictError } from "../utils/errors/error-handlers";
