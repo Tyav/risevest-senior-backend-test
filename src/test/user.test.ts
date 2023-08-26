@@ -1,4 +1,3 @@
-import path from "node:path";
 import { User } from "../entities/user.entity";
 import { UserService } from "../services/user-service";
 import { getMockRepository } from "./mocks/mock-repository";
