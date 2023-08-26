@@ -2,16 +2,16 @@ import 'reflect-metadata';
 import { BaseEntity, Column, CreateDateColumn, Entity, Index, PrimaryColumn, UpdateDateColumn, VersionColumn } from 'typeorm';
 
 
-@Entity('user')
+@Entity('users')
 export class User extends BaseEntity {
-  @PrimaryColumn({ type: 'uuid', unique: true, primaryKeyConstraintName: 'IDX_user_id' })
+  @PrimaryColumn({ type: 'uuid', unique: true, primaryKeyConstraintName: 'IDX_users_id' })
     id!: string;
 
   @Column('varchar')
     name!: string;
 
   @Column({ type:'varchar' })
-  @Index('IDX_user_email',{ unique: true })
+  @Index('IDX_users_email',{ unique: true })
     email!: string;
 
   @CreateDateColumn({
