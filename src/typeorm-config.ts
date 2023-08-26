@@ -1,5 +1,9 @@
 import "reflect-metadata";
+import dotenv from 'dotenv';
+dotenv.config();
 import { DataSource } from "typeorm";
+import { User } from "./entity/User";
+import { CreateUsersTables1693009997173 } from "./migrations/1693009997173-CreateUsersTables";
 
 const isDev = process.env.NODE_ENV === "development";
 
@@ -10,11 +14,11 @@ const dataSource: DataSource = new DataSource({
   username: process.env.DB_USER,
   password: process.env.DB_PASS,
   database: process.env.DB_NAME,
-  entities: [],
+  entities: [ User ],
   synchronize: false,
   logging: isDev,
   migrationsRun: true,
-  migrations: [],
+  migrations: [ CreateUsersTables1693009997173 ],
 });
 
 export default dataSource;

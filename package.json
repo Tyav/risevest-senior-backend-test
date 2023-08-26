@@ -8,7 +8,7 @@
     "typeorm:migration:generate": "npm run typeorm -- migration:generate src/migrations/CreateTables",
     "typeorm:migration:run": "npm run typeorm -- migration:run",
     "typeorm:migration:revert": "npm run typeorm -- migration:revert",
-    "typeorm": "TS_NODE_BASEURL=./dist ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js -d ./src/typeormconfig.ts",
+    "typeorm": "TS_NODE_BASEURL=./dist ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js -d ./src/typeorm-config.ts",
     "start:dev": "node dist/bin/www/index.js",
     "start:prod": "yarn build && node dist/bin/www/index.js",
     "test": "yarn build & jest"
@@ -29,6 +29,7 @@
     "express": "^4.18.2",
     "method-override": "^3.0.0",
     "pg": "^8.11.3",
+    "tsconfig-paths": "^4.2.0",
     "typeorm": "^0.3.17"
   },
   "devDependencies": {
@@ -37,6 +38,7 @@
     "@types/method-override": "^0.0.32",
     "@types/node": "^20.5.4",
     "@types/pg": "^8.10.2",
+    "ts-node": "^10.9.1",
     "typescript": "^5.1.6"
   }
 }
