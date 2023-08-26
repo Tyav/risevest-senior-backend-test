@@ -5,6 +5,8 @@ import { createUserValidator } from '../validation/user-validation';
 
 const router: express.Router = express.Router();
 
-router.route('/').post(Validator.validate(createUserValidator),userController.create);
+router.route('/')
+  .post(Validator.validate(createUserValidator),userController.createUser)
+  .get(userController.getUsers);
 
 export default router;

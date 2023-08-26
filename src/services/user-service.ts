@@ -7,7 +7,12 @@ import handleGetRepository from "../utils/connection";
 
 export class UserService {
   constructor(private userRepository: Repository<User>) {}
-  async create(data: CreateUserType): Promise<User> {
+  /**
+   * Creates a user
+   * @param {CreateUserType} data 
+   * @returns {Promise<User>}
+   */
+  async createUser(data: CreateUserType): Promise<User> {
     if (await this.doesUserExistByEmail(data.email)) {
       throw new ConflictError({ message: "User already exist." });
     }
@@ -17,6 +22,9 @@ export class UserService {
 
     return user;
   }
+  /**
+   * Checks if a user's record exist in DB and returns true
+   */
   async doesUserExistByEmail(email: string): Promise<boolean> {
     const user = await this.userRepository.findOne({
       where: {
@@ -24,6 +32,14 @@ export class UserService {
       },
     });
     return !!user;
+  }
+  /**
+   * Retrieves all users in database
+   */
+  async getAllUsers(): Promise<User[]> {
+    // TODO: consider pagination
+    const users = await this.userRepository.find();
+    return users
   }
 }
 
