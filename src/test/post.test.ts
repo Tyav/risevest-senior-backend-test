@@ -27,7 +27,7 @@ describe('Test for Post service', () => {
       savedPost.content = newPost.content;
       mockPostRepository.create?.mockReturnValueOnce(mockPostRepository);
       mockPostRepository.save?.mockResolvedValueOnce(savedPost)
-      const createdPost = await postService.createPost({ ...newPost, userId: postUser.id });
+      const createdPost = await postService.createPost({ ...newPost, user: postUser });
   
       expect(createdPost).toEqual(savedPost);
       expect(mockPostRepository.save).toHaveBeenCalled();

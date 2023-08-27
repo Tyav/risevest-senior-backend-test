@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response } from "express";
+import { Request, Response } from "express";
 import { CreateUserType } from "../interfaces/User";
 import catchAsync from "../utils/errors/catch-async";
 import userService from "../services/user-service";

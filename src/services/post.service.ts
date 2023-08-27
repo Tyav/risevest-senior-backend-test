@@ -11,7 +11,7 @@ export class PostService {
   async createPost(data: CreatePostType): Promise<Post> {
     const post = await this.postRepository
       .create({
-        user: { id: data.userId },
+        user: data.user,
         title: data.title,
         content: data.content,
       })
