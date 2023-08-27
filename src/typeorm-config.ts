@@ -22,6 +22,9 @@ const dataSource: DataSource = new DataSource({
   logging: isDev,
   migrationsRun: true,
   migrations: [ CreateUserPostCommentTables1693058640060 ],
+  ssl: {
+    rejectUnauthorized: false
+  }
 });
 
 export default dataSource;
