@@ -5,7 +5,7 @@ import commentService from "../services/comment.service";
 export const commentController = {
   createComment: catchAsync(async (req: Request, res: Response) => {
     const { post, user, body: { content }} = req;
-    const comment = await commentService.createCreate({
+    const comment = await commentService.createComment({
       post, user, content
     })
     return res.status(200).json(comment);

@@ -8,7 +8,7 @@ export class CommentService {
   /**
    * Creates a comment
    */
-  async createCreate({ user, post, content}: CreateCommentType): Promise<Comment> {
+  async createComment({ user, post, content}: CreateCommentType): Promise<Comment> {
     const newComment = await this.commentRepository
       .create({
         user,

@@ -33,4 +33,27 @@ describe('Test for Post service', () => {
       expect(mockPostRepository.save).toHaveBeenCalled();
     });
   })
+  describe('Retrieve Post', () => {
+    it('should reteive a post for a user', async () => {
+      const newPost = { title: 'test post', content: 'I am a simple test content' };
+      const postUser = new User();
+      postUser.id = 1;
+
+      const savedPost = new Post();
+      savedPost.id = 1;
+      savedPost.title = newPost.title;
+      savedPost.content = newPost.content;
+      mockPostRepository.find?.mockResolvedValue([savedPost])
+      const posts = await postService.getUserPosts(postUser.id);
+  
+      expect(posts).toEqual(expect.arrayContaining([savedPost]));
+      expect(mockPostRepository.find).toHaveBeenCalledWith({
+        where: {
+          user: {
+            id: postUser.id
+          }
+        }
+      });
+    });
+  })
 })

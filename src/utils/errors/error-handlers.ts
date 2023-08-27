@@ -79,7 +79,7 @@ export const HandleErrorResponse = (
   err: any,
   res: Response,
 ): Response => {
-
+  console.log(err, res)
   // You can log error here - Since this is for a test, I have not implemented it 
 
   switch (err.code) {
@@ -95,24 +95,3 @@ export const HandleErrorResponse = (
     return res.status(500).json(new ServerError(err));
   }
 };
-
-  /*
-   * Error handler. Send stacktrace only during development
-   * @public
-   */
-  // static handler(err: IError, _: Request, res: Response) {
-  //   const response: IResponse = {
-  //     statusCode: err.status,
-  //     message: err.message,
-  //     errors: err.errors,
-  //     payload: undefined,
-  //     stack: err.stack,
-  //   };
-  //   if (process.env['NODE_ENV'] !== 'development') {
-  //     delete response.stack;
-  //   }
-
-  //   // to add the status in response header, remove comment from the code below
-  //   res.status(err.status);
-  //   return res.json(response);
-  // }

@@ -15,6 +15,8 @@ router.route('/')
   .post(Validator.validate(createUserValidator),userController.createUser)
   .get(userController.getUsers);
 
+router.get('/top-users', userController.getTopUsersWithLatestComment);
+
 router.get('/:userId/auth-token', authController.getUserAuthToken);
 router
   .route('/:userId/posts')
