@@ -11,6 +11,7 @@ const isDev = process.env.NODE_ENV === "development";
 
 const dataSource: DataSource = new DataSource({
   type: "postgres",
+  url: process.env.DB_URL,
   host: process.env.DB_SERVER,
   port: Number(process.env.DB_PORT) || 5432,
   username: process.env.DB_USER,
